@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "maptest",
+    "slug": "maptest",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.maptest",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.maptest",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "facebookScheme": "fb2671989139727599",
+    "facebookAppId": "2671989139727599",
+    "facebookDisplayName": "maptest"
+  }
+}
