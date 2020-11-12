@@ -5,7 +5,7 @@ const cors = require('cors')
 
 const app = express()
 
-connect('mongodb://localhost:27017/Convoy', 
+connect('mongodb+srv://convoy:convoy@convoy.sj8nw.mongodb.net/convoy', 
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 const server = require('http').createServer(app)
