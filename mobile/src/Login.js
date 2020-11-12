@@ -37,7 +37,6 @@ export default ({ navigation = {} }) => {
       <View style={{ marginTop: '10%', marginBottom: '20%' }}>
       <Image source={Logo} />
       </View>
-      <Icon.Button name='google' backgroundColor="#f71010" children='Entrar com o Google   ' onPress={() => console.log('Agente')} />
       <View style={{ marginVertical: 10 }}>
         <Icon.Button name='facebook' backgroundColor="#3b5998" children='Entrar com o Facebook' onPress={() => login()} />
       </View>
