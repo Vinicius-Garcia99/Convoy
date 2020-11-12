@@ -1,40 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import React, { useEffect } from 'react'
+import { SafeAreaView, Image, TouchableOpacity, StyleSheet, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Logo from './Images/Logo.png'
 import * as Facebook from 'expo-facebook'
 import Axios from 'axios'
+import { api } from './services/api'
 
 export default ({ navigation = {} }) => {
   const { navigate } = navigation
-  const [status, setStatus] = useState('Não Logado')
-  const [username, setUsername] = useState('')
-  useEffect(() => {
-    console.log({ navigation })
 
-    async function setupApp() {
+  useEffect(() => {
+    (async () => {
       try {
         await Facebook.initializeAsync({ appId: '2671989139727599' })
       } catch (error) {
         console.log({ error })
       }
-    }
-    setupApp()
-  })
+    })()
+  }, [])
 
   async function login() {
     try {
       const { token = '' } = await Facebook.logInWithReadPermissionsAsync()
-
-      if (!!token)
-        setStatus('Logado')
-
       const { data = {} } = await Axios.get(`https://graph.facebook.com/me?access_token=${token}`)
+      const { data: userData } = await api.post('/auth', data)
 
-      setUsername(data.name)
-
-      
-      await Axios.post('http://localhost:3333/auth', data)
+      navigate('Home', { ...userData })
     } catch (error) {
       console.log({ error })
     }
@@ -42,13 +33,15 @@ export default ({ navigation = {} }) => {
 
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <TouchableOpacity onPress={() => navigate('Home')}>
-        <Image source={Logo} style={{ marginTop: 100, marginBottom: 250 }} />
-      </TouchableOpacity>
-      <Icon.Button name='facebook' backgroundColor="#3b5998" children='Entrar com o Facebook' onPress={() => login()} />
-
-      <Text style={{ marginTop: 20 }} children={`Status: ${status}`} />
-      {username ? <Text children={`Nome do usuário: ${username}`} /> : undefined}
+      {/* <View style={{ marginTop: 100, marginBottom: 200 }}> */}
+      <View style={{ marginTop: '10%', marginBottom: '20%' }}>
+      <Image source={Logo} />
+      </View>
+      <Icon.Button name='google' backgroundColor="#f71010" children='Entrar com o Google   ' onPress={() => console.log('Agente')} />
+      <View style={{ marginVertical: 10 }}>
+        <Icon.Button name='facebook' backgroundColor="#3b5998" children='Entrar com o Facebook' onPress={() => login()} />
+      </View>
+      <Icon.Button name='user' backgroundColor="#111" children='Entrar como Agente      ' onPress={() => navigate('LoginAgent')} />
     </SafeAreaView>
   )
 }
