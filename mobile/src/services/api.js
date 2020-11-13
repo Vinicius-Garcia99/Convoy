@@ -1,2 +1,3 @@
 import axios from 'axios'
-export const api = axios.create({ baseURL: 'http://192.168.15.5:3333' })
+// export const api = axios.create({ baseURL: 'http://192.168.15.5:3333' })
+export const api = axios.create({ baseURL: 'https://convoy-api.herokuapp.com' })
